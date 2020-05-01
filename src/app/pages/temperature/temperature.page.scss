@@ -1,0 +1,14 @@
+@media(max-height: 300px){
+.Chart{
+    position: relative;
+    height: 100px;
+}
+}
+.metric-select{
+    width: 20%;
+}
+@media(max-width: 400px){
+.metric-select{
+    width: 100%;
+}
+}

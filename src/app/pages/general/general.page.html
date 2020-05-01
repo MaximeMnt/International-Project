@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>general</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="DataDevice">
+  <ion-card class="InfoDevice">
+    <ion-card-header>
+      <ion-card-title>Latest Information from: {{DataDevice.Name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="types">
+        <p>Status:</p>
+        <p>Temperature:</p>
+        <p>Humidity:</p>
+        <p>Moisture:</p>
+        <p>Battery:</p>
+      </div>
+      <div class="data">
+        <p class="{{Status}}"></p>
+        <p>{{DataDevice.Temperature}}°C</p>
+        <p>{{DataDevice.Humidity}}%</p>
+        <p>{{DataDevice.Moisture}}%</p>
+        <p>{{DataDevice.Battery}}%</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header class="AllDevices">
+      <ion-card-title>Devices</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <table>
+        <div>
+          <th>Device</th>
+          <th>Status</th>
+          <tr *ngFor="let device of Device">
+            <td>{{device.Name}}</td>
+            <td>{{device.Status}}</td>
+        </div>
+      </table>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

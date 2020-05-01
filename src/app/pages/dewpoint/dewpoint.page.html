@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dewpoint</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <b>Temperature</b>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item
+        class="chart-container"
+        style="position: relative; height: 40vh;"
+      >
+        <canvas
+          baseChart
+          [datasets]="chartData"
+          [labels]="chartLabels"
+          [chartType]="chartType"
+          [options]="chartOptions"
+          [legend]="showLegend"
+          item-content
+        >
+        </canvas>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Settings</ion-card-title>
+    </ion-card-header>
+    <ion-item>
+      <ion-label>Line chart?</ion-label>
+      <ion-toggle (ionChange)="typeChanged($event)" checked></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Show Legend?</ion-label>
+      <ion-toggle [(ngModel)]="showLegend"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>24h View?</ion-label>
+      <ion-toggle [(ngModel)]="showHourView" (ionChange)="viewChanged($event)"></ion-toggle>
+    </ion-item>
+    <ion-item class="metric-select">
+      <ion-segment
+        value="celcius"
+        mode="md"
+        (ionChange)="TempSegmentChanged($event)"
+      >
+        <ion-segment-button value="celcius">
+          <ion-label>C°</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="fahrenheit">
+          <ion-label>F°</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-item>
+  </ion-card>
+</ion-content>

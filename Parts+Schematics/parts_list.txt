@@ -1,0 +1,37 @@
+﻿Miscellaneous
+1x ESP-WROOM-32
+1x 800mAh LiPo-battery 3.7V
+1x 2-pin 90° male header for battery
+1x 7-pin 90° female header for sensors
+1x FT232RL USB to UART
+1x TP4351B battery charging
+1x BC817-40 transistor
+1x USB Mini-B female port
+1x 1N4007 diode
+1x Buzzer
+1x on/off switch
+2x micro switch
+2x led
+
+Capacitors
+1x 4.7nF
+3x 100nF
+1x 10nF
+1x 1µF
+1x 2.2µF
+1x 4.7µF
+2x 10µF
+
+Resistors
+1x 1.5Ω
+2x 2.7Ω
+1x 120Ω
+1x 1KΩ
+4x 10KΩ
+1x 1.5MΩ
+2x to be calculated
+
+Inductors
+1x 2.2µH
+
+

@@ -1,0 +1,152 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon name="options-outline"></ion-icon> Settings
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text color="dark" class="settingsText">
+    <h4>Device Settings</h4>
+  </ion-text>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Change the Bluetooth settings of the device
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content *ngFor="let p of pageWifi">
+      <ion-button [routerLink]="p.url" [class.active-item]="selectedPath===p.url" color="dark">{{p.title}}</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-text color="dark" class="settingsText">
+    <h4>General Settings</h4>
+  </ion-text>
+  <!--Select device for changing settings-->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Select Device</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-card-subtitle>Select the device where you want to change the settings from</ion-card-subtitle>
+
+      <ion-list *ngIf="Device">
+        <ion-list-header>
+          <ion-label>
+            Select device
+          </ion-label>
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>Devices</ion-label>
+          <ion-select cancelText="Cancel" okText="Confirm" [(ngModel)]="SelectedDevice">
+            <ion-select-option value="{{chosendevice.ID}}" *ngFor="let chosendevice of Device">{{chosendevice.Name}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+
+  <!--Change name of the device-->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Change the name of the device</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-card-subtitle>Change the name of the selected device</ion-card-subtitle>
+      <p *ngIf="SelectedDevice">Selected device: <strong>{{GetDeviceNameFromID()}}</strong></p>
+      <ion-input clearInput placeholder="Enter New Name Here" [(ngModel)]="newNameforDevice"></ion-input>
+      <ion-button color="dark" (click)="ApplyNewName()">Apply</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!--Change Password card-->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Change Password</ion-card-title>
+      <ion-card-subtitle>Change the password of the device</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p *ngIf="SelectedDevice">Selected device: <strong>{{GetDeviceNameFromID()}}</strong></p>
+      <ion-input clearInput placeholder="Old Password" type="password" [(ngModel)]="oldPassword"></ion-input>
+      <ion-input clearInput placeholder="New Password" type="password" [(ngModel)]="newPassword"></ion-input>
+      <ion-button color="dark" (click)="ApplyPasswordChange()">Change password</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-text color="dark" class="settingsText">
+    <h4>Advanced Settings</h4>
+  </ion-text>
+  <!--Tweede kaartje-->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Enable or disable features</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Send automatic requests to the database</ion-label>
+        <ion-toggle [(ngModel)]="AutoRequestToDataBase" disabled="false"></ion-toggle>
+      </ion-item>
+
+      <ion-button (click)='checkForChanges()' color="dark">Apply changes</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!--Derde kaartje-->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Dark Mode</ion-card-title>
+      <ion-card-subtitle>Change the overall theme of the app.</ion-card-subtitle>
+    </ion-card-header>
+    <!-- <ion-item>
+      <ion-button (click)="toggleDarkMode()" color="dark">Toggle Dark Mode</ion-button>
+    </ion-item> -->
+    <ion-item>
+      <ion-toggle (ionChange)="toggleDarkMode($event)">Toggle Dark Mode</ion-toggle>
+    </ion-item>
+
+  </ion-card>
+
+
+
+
+  <!--Danger Zone-->
+  <ion-text color="danger" class="settingsText">
+    <h4><b>Danger Zone</b></h4>
+  </ion-text>
+
+  <!--Reset Device card-->
+  <ion-card color="danger">
+    <ion-card-header>
+      <ion-card-title>Reset to default settings</ion-card-title>
+      <ion-item color="danger"> 
+        <ion-label>Choose the device that you want to reset</ion-label>
+        <ion-select [(ngModel)]="Selected" okText="Okay" cancelText="Dismiss">
+          <ion-select-option *ngFor="let name of Device" value="{{name.ID}}">{{name.Name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-card-subtitle><b>WARNING!</b> This will delete <b>everything</b> on the device!</ion-card-subtitle>
+     <!--<p *ngIf="Selected">Selected device: <strong>{{name.ID}}</strong></p>-->
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button color="dark" (click)="HardResetEverything()" >RESET DEVICE</ion-button>
+      <p></p>
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- <ion-button routerLink="/home" shape="round" color="dark" fill="outline">
+    Home
+  </ion-button> -->
+
+</ion-content>

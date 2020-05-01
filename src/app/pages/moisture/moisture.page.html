@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>MOISTURE</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <b>Moisture</b>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item class="chart-container" style="position: relative; height:40vh;">
+        <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [chartType]="chartType" [options]="chartOptions"
+          [legend]="showLegend" item-content>
+        </canvas>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Settings</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Line chart?</ion-label>
+        <ion-toggle (ionChange)="typeChanged($event)" checked></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Show Legend?</ion-label>
+        <ion-toggle [(ngModel)]="showLegend"></ion-toggle>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <b>Limit the Moisture level:</b>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-range [(ngModel)]="rangeCount" dualKnobs="false" min="0" max="100" step="1" snaps="false" color="dark"
+          pin="true" class="Icons" id="Slider">
+          <ion-icon name="sunny-outline" id="sun"></ion-icon>
+          <ion-icon name="water-outline" id="water"></ion-icon>
+        </ion-range>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf='moistEntries'>
+    <ion-card-header>
+      List when moisture level got exceeded
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-list>
+        <ion-item-sliding *ngFor="let item of moistEntries">
+          <ion-item>
+            <ion-label>Moisture: {{item.moisture}}°C</ion-label>
+            <ion-label>Date: {{item.date | date}}</ion-label>
+            <ion-label>Time: {{item.time}} </ion-label>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option (click)="removeMoistEntry(item.id)">
+              <ion-icon name="close-circle-outline"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+
+      <br>
+      <ion-button color="dark" (click)="removeAllMoistEntries()">Remove All Moisture Entries</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

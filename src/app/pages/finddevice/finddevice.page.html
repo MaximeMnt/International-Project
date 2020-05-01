@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-buttons slot="start">
+    <ion-back-button color="light"></ion-back-button>
+  </ion-buttons>
+  <ion-toolbar>
+    <ion-title>Find Device</ion-title>
+    <ion-button (click)="startScanning()" slot="end"><ion-icon name="Bluetooth"></ion-icon>Refresh</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<!--Select bluetooth device from list-->
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Select Device</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-card-subtitle>Select the device where you want to change the settings from</ion-card-subtitle>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>
+          Select device
+        </ion-label>
+      </ion-list-header>
+    
+      <ion-item>
+        <ion-label>Paired Devices:</ion-label>
+
+        <ion-select cancelText="Cancel" okText="Confirm" [(ngModel)]="BluetoothDevice">
+          <ion-select-option value="{{chosendevice.id}}" *ngFor="let chosendevice of pairedDevices" >{{chosendevice.name || 'Unnamed'}}</ion-select-option>
+        </ion-select>
+
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label>Unpaired Devices:</ion-label>
+        <ion-select cancelText="Cancel" okText="Confirm" [(ngModel)]="BluetoothDevice">
+          <ion-select-option value="{{chosenUnPaireddevice.id}}" *ngFor="let chosenUnPaireddevice of unpairedDevices" >{{chosenUnPaireddevice.name || 'Unnamed'}} {{chosenUnPaireddevice.address}}</ion-select-option>          
+        </ion-select>
+        <ion-spinner name="crescent"
+        *ngIf="gettingDevices"></ion-spinner>
+      </ion-item>
+    </ion-list>
+
+
+  </ion-card-content>
+</ion-card>
+
+<!--Change Password card-->
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Change Wifi Settings</ion-card-title>
+    <ion-card-subtitle>Change ssid and password</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-input clearInput placeholder="SSID" type="text" [(ngModel)]="ssid"></ion-input>
+    <ion-input clearInput placeholder="Password" type="password" [(ngModel)]="password"></ion-input>
+   <ion-button color="dark" (click)='selectDevice(BluetoothDevice)'>Send data to device</ion-button>
+  </ion-card-content>
+</ion-card>
+</ion-content>
+ionic cordova plugin add @ionic-enterprise/offline-storage
